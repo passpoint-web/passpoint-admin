@@ -7,6 +7,7 @@ import TableSkeletonLoader from "./TableSkeletonLoader"
 
 export default function KYC() {
   const [unapprovedUsers, setUnapprovedUsers] = useState([])
+  const [approvedUsers, setApprovedUsers] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   async function getUnapprovedUsers() {
     setIsLoading(true)
@@ -24,7 +25,11 @@ export default function KYC() {
         <DashboardCard title="Approved Signups" value="- - -" />
         <DashboardCard
           title="Unapproved Signups"
-          value={unapprovedUsers.length}
+          value={
+            unapprovedUsers?.filter(
+              (user) => !approvedUsers?.includes(user.userId)
+            ).length
+          }
         />
         <DashboardCard title="Rejected Signups" value="- - -" />
       </div>
@@ -32,7 +37,11 @@ export default function KYC() {
       {isLoading ? (
         <TableSkeletonLoader />
       ) : (
-        <DashboardTable data={unapprovedUsers} />
+        <DashboardTable
+          data={unapprovedUsers}
+          approvedUsers={approvedUsers}
+          setApprovedUsers={setApprovedUsers}
+        />
       )}
     </main>
   )

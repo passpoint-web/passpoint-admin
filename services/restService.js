@@ -63,7 +63,7 @@ export const kyc = {
     return restAgent.post("getUnapprovedUsers", setConfig())
   },
   getKycSingleDetails: (userId) => {
-    return restAgent.get(
+    return restAgent.post(
       "getKycSingleDetails",
       { userId: Number(userId) },
       setConfig()

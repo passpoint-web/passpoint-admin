@@ -4,10 +4,9 @@ import { useRouter } from "next/navigation"
 import { setSelectedUser } from "@/services/localService"
 import { kyc } from "@/services/restService"
 
-const DashboardTable = ({ data }) => {
+const DashboardTable = ({ data, approvedUsers, setApprovedUsers }) => {
   const router = useRouter()
   const [approveRowLoading, setApproveRowLoading] = useState(null)
-  const [approvedUsers, setApprovedUsers] = useState([])
 
   const handleRowClick = (user) => {
     setSelectedUser(user)
