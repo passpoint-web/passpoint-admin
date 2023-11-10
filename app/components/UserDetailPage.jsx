@@ -1,13 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react"
+"use client"
+import { getSelectedUser } from "@/services/localService"
+import { kyc } from "@/services/restService"
+import { useParams } from "next/navigation"
+import React, { useState } from "react"
 
-export default function UserDetailPage({ user }) {
-  const handleApprove = () => {
-    // Implement your approval logic here
-    console.log("User Approved")
+export default function UserDetailPage() {
+  const { user_id } = useParams()
+  const selectedUser = getSelectedUser()
+  const [isLoading, setIsLoading] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [user, setUser] = useState(selectedUser)
+
+  const handleApprove = async (userId) => {
+    setIsUploading(true)
+    await kyc.approveKYC(userId)
+    setIsUploading(false)
   }
 
-  const handleReject = () => {
+  const handleReject = async () => {
     // Implement your rejection logic here
     console.log("User Rejected")
   }
@@ -15,10 +26,12 @@ export default function UserDetailPage({ user }) {
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm mx-6 my-6">
       <div className="flex justify-between items-center mb-6 p-6 py-4 bg-[#009ec410] rounded-xl">
-        <h2 className="text-xl font-semibold">John Doe</h2>
+        <h2 className="text-xl font-semibold">
+          {user.firstName || "N/A"} {user.lastName}{" "}
+        </h2>
         <div>
           <button
-            onClick={handleApprove}
+            onClick={() => handleApprove(user_id)}
             className=" bg-gray-800 px-4 py-2 text-white rounded-xl mr-2"
           >
             Approve User
@@ -26,6 +39,7 @@ export default function UserDetailPage({ user }) {
           <button
             onClick={handleReject}
             className="text-red-500 px-4 py-2 rounded-xl hover:bg-red-500 hover:text-white"
+            disabled
           >
             Reject
           </button>
@@ -37,7 +51,9 @@ export default function UserDetailPage({ user }) {
           <h3 className="text-xl font-semibold mb-2">User Information</h3>
           <div className="mb-4">
             <label className="font-medium text-gray-500">Full Name</label>
-            <p>This is the Value</p>
+            <p>
+              {user.firstName || "N/A"} {user.lastName}{" "}
+            </p>
           </div>
           <div className="mb-4">
             <label className="font-medium text-gray-500">Email Address</label>
