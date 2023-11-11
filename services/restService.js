@@ -59,6 +59,9 @@ export const kyc = {
   getKycDetails: () => {
     return restAgent.get("getKycDetails", setConfig())
   },
+  getKycDashboardStats: () => {
+    return restAgent.get("kycStats", setConfig())
+  },
   getUnapprovedUsers: () => {
     return restAgent.post("getUnapprovedUsers", setConfig())
   },
@@ -71,6 +74,9 @@ export const kyc = {
   },
   approveKYC: (userId) => {
     return restAgent.post("approveKyc", { userId }, setConfig())
+  },
+  rejectKYC: (userId) => {
+    return restAgent.post("rejectKyc", { userId }, setConfig())
   },
   uploadKycIdentity: (data) => {
     return restAgent.post("kycProofCooperateIdentity", data, setConfig())
