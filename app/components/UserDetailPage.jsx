@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react"
 export default function UserDetailPage() {
   const { user_id } = useParams()
   const selectedUser = getSelectedUser()
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [user, setUser] = useState(selectedUser || {})
   const [userApproved, setUserApproved] = useState(false)
@@ -35,6 +35,7 @@ export default function UserDetailPage() {
     if (user_id) {
       getSingleKYCInfo()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user_id])
 
   return (
