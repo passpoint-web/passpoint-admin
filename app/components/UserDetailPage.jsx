@@ -9,7 +9,7 @@ import FWLoader from "./FWLoader"
 export default function UserDetailPage() {
   const { user_id } = useParams()
   const selectedUser = getSelectedUser()
-  // const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [user, setUser] = useState(selectedUser || {})
   const [userApproved, setUserApproved] = useState(false)
