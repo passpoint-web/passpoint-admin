@@ -3,10 +3,16 @@ import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { setSelectedUser } from "@/services/localService"
 import { kyc } from "@/services/restService"
+import IconLoader from "./IconLoader"
 
-const DashboardTable = ({ data, approvedUsers, setApprovedUsers }) => {
+const DashboardTable = ({
+  data,
+  approvedUsers,
+  setApprovedUsers,
+  refreshData,
+}) => {
   const router = useRouter()
-  const [approveRowLoading, setApproveRowLoading] = useState(null)
+  const [isUploading, setIsUploading] = useState(null)
 
   const handleRowClick = (user) => {
     setSelectedUser(user)
@@ -14,10 +20,17 @@ const DashboardTable = ({ data, approvedUsers, setApprovedUsers }) => {
   }
 
   const handleApprove = async (userId) => {
-    setApproveRowLoading(userId)
+    setIsUploading(userId)
     await kyc.approveKYC(userId)
-    addApprovedUser(userId)
-    setApproveRowLoading(null)
+    setIsUploading(null)
+    refreshData()
+  }
+
+  const handleReject = async (userId) => {
+    setIsUploading(userId)
+    await kyc.rejectKYC(userId)
+    setIsUploading(null)
+    refreshData()
   }
 
   const addApprovedUser = async (userId) => {
@@ -54,7 +67,12 @@ const DashboardTable = ({ data, approvedUsers, setApprovedUsers }) => {
                 <td className="px-6 py-4">{user.businessName || "N/A"}</td>
                 <td className="px-6 py-4">{user.email}</td>
                 <td className="px-6 py-4">
-                  <div className="flex flex-nowrap">
+                  <div className="flex flex-nowrap justify-center align-middle">
+                    {isUploading === user.userId && (
+                      <div className="mt-2 mr-4">
+                        <IconLoader />
+                      </div>
+                    )}
                     <button
                       className=" bg-gray-800 px-4 py-2 text-white rounded-xl mr-4 text-sm"
                       onClick={(e) => {
@@ -62,15 +80,16 @@ const DashboardTable = ({ data, approvedUsers, setApprovedUsers }) => {
                         handleApprove(user.userId)
                       }}
                     >
-                      {approveRowLoading === user?.userId
-                        ? "approving..."
-                        : "Approve"}
+                      Approve
                     </button>
                     <button
                       className="text-red-500 hover:underline text-sm"
-                      disabled
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleReject(user.userId)
+                      }}
                     >
-                      Deny
+                      Reject
                     </button>
                   </div>
                 </td>

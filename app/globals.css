@@ -4,6 +4,7 @@
 
 :root {
   --sidebar-width: 280px;
+  --primary: #009ec4;
 }
 
 body {
@@ -71,4 +72,69 @@ button:disabled {
   100% {
     background-position: 200%;
   }
+}
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid #000;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 0.5s linear infinite;
+  animation: spin 0.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* PROGRESS BAR */
+progress {
+  width: 110px;
+  background: #7be0dd46;
+  height: 8px;
+  transition: var(--progress-interval);
+  position: absolute;
+  bottom: 0;
+  -webkit-transition: var(--progress-interval);
+  -moz-transition: var(--progress-interval);
+  -ms-transition: var(--progress-interval);
+  -o-transition: var(--progress-interval);
+}
+progress::-webkit-progress-bar {
+  border-radius: 4px;
+  /* background: #e2fffe; */
+  background: var(--bg-grey);
+  transition: var(--progress-interval);
+}
+progress::-webkit-progress-value {
+  background: var(--primary);
+  transition: var(--progress-interval);
+  -webkit-transition: var(--progress-interval);
+  -moz-transition: var(--progress-interval);
+  -ms-transition: var(--progress-interval);
+  -o-transition: var(--progress-interval);
+}
+progress::-moz-progress-bar {
+  /* background: #e2fffe; */
+  background: var(--bg-grey);
+  transition: var(--progress-interval);
+}
+progress::-moz-progress-value {
+  background: var(--primary);
+  transition: var(--progress-interval);
 }
