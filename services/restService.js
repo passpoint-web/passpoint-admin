@@ -3,10 +3,6 @@ import { getToken } from "./localService"
 // import cookies from '@/plugins/cookies';
 // import { Redirect } from 'next';
 const restAgent = axios.create({
-  // baseURL: "https://api.jessecoders.com/passpointGo/v1/",
-  // headers: {
-  // 	"Content-Type": "application/json",
-  // },
   baseURL: "https://webapi.mypasspoint.com/v1/",
   headers: {
     "Content-Type": "application/json",
