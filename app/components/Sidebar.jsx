@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation"
 import React from "react"
 
 const Sidebar = () => {
+  const pathname = usePathname()
   const routes = [
     {
       name: "KYC",
@@ -30,8 +31,8 @@ const Sidebar = () => {
               href={route.path}
               key={route.name}
               className={`hover:text-white hover:bg-gray-400  px-4 py-4 block font-semibold ${
-                usePathname().includes(route.path) ||
-                usePathname().includes(route.otherPath)
+                pathname.includes(route.path) ||
+                pathname.includes(route.otherPath)
                   ? "bg-gray-300"
                   : ""
               }`}

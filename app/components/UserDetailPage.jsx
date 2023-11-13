@@ -46,6 +46,7 @@ export default function UserDetailPage() {
     if (user_id) {
       getSingleKYCInfo()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user_id])
 
   return (

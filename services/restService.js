@@ -1,8 +1,9 @@
 import axios from "axios"
-import { getToken, setLogout } from "./localService"
+import { getToken } from "./localService"
 // import cookies from '@/plugins/cookies';
 // import { Redirect } from 'next';
 const restAgent = axios.create({
+  baseURL: "https://webapi.mypasspoint.com/v1/",
   // baseURL: "https://api.jessecoders.com/passpointGo/v1/",
   // headers: {
   // 	"Content-Type": "application/json",
@@ -29,7 +30,6 @@ restAgent.interceptors.response.use(undefined, (error) => {
     // ||
     // (statusCode && statusCode === 403)
   ) {
-    setLogout()
     if (!window.location.pathname.includes("/auth/login")) {
       window.location.href = `/auth/login?fallBackUrl=${window.location.pathname}`
     }

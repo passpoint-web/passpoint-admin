@@ -15,7 +15,7 @@ export default function KYC() {
   async function getUnapprovedUsers() {
     setIsLoading(true)
     const promise = await kyc.getUnapprovedUsers()
-    setUnapprovedUsers(promise.data.data)
+    setUnapprovedUsers(promise.data.data?.reverse())
     setIsLoading(false)
   }
   async function getKYCStats() {
