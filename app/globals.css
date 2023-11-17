@@ -138,3 +138,15 @@ progress::-moz-progress-value {
   background: var(--primary);
   transition: var(--progress-interval);
 }
+
+@layer utilities {
+  .transition-g {
+    transition: all 0.5s ease-in-out;
+  }
+  .scaling {
+    transform: scale(1.03);
+  }
+  .gridCol {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
