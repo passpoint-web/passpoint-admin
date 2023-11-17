@@ -54,9 +54,9 @@ const DashboardTable = ({
         <tbody>
           {data
             ?.filter((user) => !approvedUsers?.includes(user.userId))
-            .map((user) => (
+            .map((user, index) => (
               <tr
-                key={user.id}
+                key={index}
                 onClick={() => handleRowClick(user)}
                 className="cursor-pointer hover:bg-gray-100 border-t"
               >
