@@ -9,13 +9,13 @@ import Image from "next/image";
 import { Download } from "../icons";
 
 export default function UserDetailPage() {
-  const { user_id } = useParams();
-  const selectedUser = getSelectedUser();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const [user, setUser] = useState(selectedUser || {});
-  const [userApproved, setUserApproved] = useState(false);
-  const router = useRouter();
+  const { user_id } = useParams()
+  const selectedUser = getSelectedUser()
+  const [isLoading, setIsLoading] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [user, setUser] = useState({})
+  const [userApproved, setUserApproved] = useState(false)
+  const router = useRouter()
 
   const handleApprove = async (userId) => {
     setIsUploading(true);
@@ -46,6 +46,9 @@ export default function UserDetailPage() {
     }
   };
 
+  useEffect(() => {
+    setUser(selectedUser)
+  }, [])
   useEffect(() => {
     if (user_id) {
       getSingleKYCInfo();
