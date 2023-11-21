@@ -8,6 +8,7 @@ import FWLoader from "./FWLoader";
 import Image from "next/image";
 import { Download } from "../icons";
 
+
 export default function UserDetailPage() {
   const { user_id } = useParams()
   const selectedUser = getSelectedUser()
