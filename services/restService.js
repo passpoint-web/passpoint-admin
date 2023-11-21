@@ -9,7 +9,7 @@ const restAgent = axios.create({
 const getRequestConfig = () => {
   return {
     headers: {},
-    params: {},
+    params: {}
   }
 }
 
