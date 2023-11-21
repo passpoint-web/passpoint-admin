@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 "use client";
 import { getSelectedUser } from "@/services/localService";
 import { kyc } from "@/services/restService";
