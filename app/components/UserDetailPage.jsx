@@ -38,11 +38,9 @@ export default function UserDetailPage() {
       setIsLoading(true);
       const res = await kyc.getKycSingleDetails(user_id);
       setUser({ ...user, ...res.data.data });
-      console.log(res.data.data);
       setIsLoading(false);
-    } catch (err) {
+    } catch (_err) {
       setIsLoading(false);
-      console.log(err);
     }
   };
 

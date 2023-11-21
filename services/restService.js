@@ -15,7 +15,6 @@ const getRequestConfig = () => {
 
 restAgent.interceptors.response.use(undefined, (error) => {
   const statusCode = error.response ? error.response.status : null
-  console.log("Inte", statusCode)
   if (
     statusCode &&
     statusCode === 401
@@ -30,14 +29,11 @@ restAgent.interceptors.response.use(undefined, (error) => {
 })
 
 export const setConfig = () => {
-  // console.log(cookies.get('token'))
   const config = getRequestConfig()
   return config
 }
 
 const setTravelConfig = () => {
-  // const token = getToken()
-  // console.log(cookies.get('token'))
   const config = getRequestConfig()
   config.headers.Authorization = `Bearer 123`
   return config
